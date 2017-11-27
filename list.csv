@@ -1,0 +1,13 @@
+,FROM COUNTRY,FROM COUNTRY CODE,TO COUNTRY,TO COUNTRY CODE,VALUE
+0,US Dollar,USD,US Dollar,USD,0.0
+1,US Dollar,USD,Indian Ruppee,INR,0.0
+2,US Dollar,USD,UK - Pound Sterling,GBP,0.0
+3,US Dollar,USD,Australian Dollar,AUD,0.0
+4,US Dollar,USD,EURO,EUR,0.0
+5,US Dollar,USD,Brazilian Real,BRL,0.0
+6,US Dollar,USD,Canadian Dollar,CAD,0.0
+7,US Dollar,USD,Yuan Renminbi - China,CNY,0.0
+8,US Dollar,USD,Honkong Dollar,HKD,0.0
+9,US Dollar,USD,Yen - Japan,JPY,0.0
+10,US Dollar,USD,New Zealand Dollar,NZD,0.0
+11,US Dollar,USD,Singapore Dollar,SGD,0.0

@@ -11,6 +11,10 @@ Created on Sat Nov 25 20:08:51 2017
 from tkinter import *
 import time
 from currency_converter import CurrencyConverter
+import pandas as pd
+import csv
+from tables import createStandardTable as cst
+
 
 root=Tk()
 root.geometry("1600x800+0+0")
@@ -19,13 +23,16 @@ cInput=StringVar()
 operator=""
 coi = 0.0
 
-Tops=Frame(root,width=1600,height=50,bg="sienna2",relief=SUNKEN)
+Tops=Frame(root,width=1600,height=5,bg="sienna2",relief=SUNKEN)
 Tops.pack(side=TOP)
 
 f2=Frame(root,width=300,height=700,relief=SUNKEN)
 f2.pack(side=LEFT)
-f1=Frame(root,width=800,height=700,relief=SUNKEN)
+f1=Frame(root,width=400,height=700,relief=SUNKEN)
 f1.pack(side = LEFT)
+f3=Frame(root,width=900,height=700,relief=SUNKEN)
+f3.pack(side=LEFT)
+
 localtime=time.asctime(time.localtime(time.time()))
 
 
@@ -49,9 +56,8 @@ def btnClearDisplay():
 
 
 
+newlist = [['','','','',0.0] for i in range(12)]
 
-     
-      
 def Ref():
     
     
@@ -65,6 +71,45 @@ def Ref():
     value = c.convert(coi,cof,cob)
     Cost.set(value)
     
+    global newlist
+
+    for i in range(0,12):   
+        newlist[i][1] = cof
+    
+    
+    
+    
+    x = ['USD','INR','GBP','AUD','EUR','BRL','CAD','CNY','HKD','JPY','NZD','SGD']
+    y = ['US Dollar','Indian Ruppee','UK - Pound Sterling','Australian Dollar','EURO','Brazilian Real','Canadian Dollar','Yuan Renminbi - China','Honkong Dollar','Yen - Japan','New Zealand Dollar','Singapore Dollar']
+    
+    
+    
+    
+    for j in range(0,len(x)):
+        newlist[j][0] = y[x.index(cof)]
+        newlist[j][2] = y[j]
+        newlist[j][3] = x[j]
+        newlist[j][4] = c.convert(coi,cof,x[j])
+
+        
+    
+    my_df1 = pd.DataFrame(newlist)
+    my_df1.columns = ['FROM COUNTRY','FROM COUNTRY CODE','TO COUNTRY','TO COUNTRY CODE','VALUE']
+    my_df1.to_csv('list.csv',index=False,header = True)
+    ct()
+
+f = open("list.csv")
+newtable = cst(f,f3)    
+def createTableFrame():
+    f = open("list.csv")
+    global newtable
+    newtable = cst(f,f3)
+    newtable.grid()  
+def ct():
+    global newtable
+    newtable.destroy()
+    createTableFrame()
+      
     
 
 def qExit():
@@ -147,16 +192,29 @@ lblcTo.grid(row=2,column=0)
 txtcTo=Entry(f1,font=('arial',16,'bold'),textvariable=cTo,bd=10,insertwidth=4,bg="alice blue",justify="right")
 txtcTo.grid(row=2,column=1)
 
-
+lblCost=Label(f1,font=('arial',16,'bold'),text="------------",bd=16,anchor='w')
+lblCost.grid(row=3,column=0)
+lblCost=Label(f1,font=('arial',16,'bold'),text="-------------------------------------",bd=16,anchor='w')
+lblCost.grid(row=3,column=1)
 
 lblCost=Label(f1,font=('arial',16,'bold'),text="Conversion",bd=16,anchor='w')
-lblCost.grid(row=1,column=2)
+lblCost.grid(row=4,column=0)
 txtCost=Entry(f1,font=('arial',16,'bold'),textvariable=Cost,bd=10,insertwidth=4,bg="#ffffff",justify="right")
-txtCost.grid(row=1,column=3)
+txtCost.grid(row=4,column=1)
 
-btnTotal=Button(f1,padx=16,pady=16,bd=8,fg="white",font=('arial',16,'bold'),width=10,text="Total",bg="dark orange",command=Ref).grid(row=7,column=1)
-btnReset=Button(f1,padx=16,pady=16,bd=8,fg="white",font=('arial',16,'bold'),width=10,text="Reset",bg="firebrick",command=Reset).grid(row=7,column=2)
-btnExit=Button(f1,padx=16,pady=16,bd=8,fg="black",font=('arial',16,'bold'),width=10,text="Quit",bg="powder blue",command=qExit).grid(row=7,column=3)
+btnTotal=Button(f1,padx=16,pady=16,bd=8,fg="white",font=('arial',16,'bold'),width=10,text="Total",bg="dark orange",command=Ref).grid(row=1,column=3)
+btnReset=Button(f1,padx=16,pady=16,bd=8,fg="white",font=('arial',16,'bold'),width=10,text="Reset",bg="firebrick",command=Reset).grid(row=2,column=3)
+btnExit=Button(f1,padx=16,pady=16,bd=8,fg="black",font=('arial',16,'bold'),width=10,text="Quit",bg="powder blue",command=qExit).grid(row=4,column=3)
+
+
+
+
+
+
+
+
+
+
 
 
 
