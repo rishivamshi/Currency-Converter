@@ -63,8 +63,7 @@ def Ref():
     
     cof=str(cFrom.get())
     cob=str(cTo.get())
-    
-    
+   
     global coi
     coi = float(cInput.get())
     c = CurrencyConverter()
@@ -74,25 +73,17 @@ def Ref():
     global newlist
 
     for i in range(0,12):   
-        newlist[i][1] = cof
-    
-    
-    
+        newlist[i][1] = cof      
     
     x = ['USD','INR','GBP','AUD','EUR','BRL','CAD','CNY','HKD','JPY','NZD','SGD']
     y = ['US Dollar','Indian Ruppee','UK - Pound Sterling','Australian Dollar','EURO','Brazilian Real','Canadian Dollar','Yuan Renminbi - China','Honkong Dollar','Yen - Japan','New Zealand Dollar','Singapore Dollar']
-    
-    
-    
-    
+       
     for j in range(0,len(x)):
         newlist[j][0] = y[x.index(cof)]
         newlist[j][2] = y[j]
         newlist[j][3] = x[j]
         newlist[j][4] = c.convert(coi,cof,x[j])
-
         
-    
     my_df1 = pd.DataFrame(newlist)
     my_df1.columns = ['FROM COUNTRY','FROM COUNTRY CODE','TO COUNTRY','TO COUNTRY CODE','VALUE']
     my_df1.to_csv('list.csv',index=False,header = True)
@@ -100,29 +91,26 @@ def Ref():
 
 f = open("list.csv")
 newtable = cst(f,f3)    
+
 def createTableFrame():
     f = open("list.csv")
     global newtable
     newtable = cst(f,f3)
-    newtable.grid()  
+    newtable.grid(padx=20,pady=20)  
+
 def ct():
     global newtable
     newtable.destroy()
     createTableFrame()
       
-    
-
 def qExit():
     root.destroy()
     
-def Reset():
-    
+def Reset():    
     cFrom.set("USD")
     cTo.set("INR")
     Cost.set("")
     
-
-
   
 txtDisplay=Entry(f2,font=('arial',20,'bold'),textvariable=cInput,bd=30,insertwidth=4,bg="alice blue",justify='right')
 txtDisplay.grid(columnspan=4)
@@ -163,14 +151,6 @@ btnEquals=Button(f2,padx=16,pady=16,bd=8,fg="white",font=('arial',20,'bold'),
             text="=",bg="dark orange",command= Ref).grid(row=5,column=2)
 
 
-
-
-
-
-
-
-
-
 cFrom=StringVar()
 cTo=StringVar()
 
@@ -179,7 +159,6 @@ cTo.set("INR")
 cInput.set(0.0)
 
 Cost=StringVar()
-
 
 
 lblcFrom=Label(f1,font=('arial',16,'bold'),text="FROM",bd=16,anchor='w')
@@ -205,18 +184,6 @@ txtCost.grid(row=4,column=1)
 btnTotal=Button(f1,padx=16,pady=16,bd=8,fg="white",font=('arial',16,'bold'),width=10,text="Total",bg="dark orange",command=Ref).grid(row=1,column=3)
 btnReset=Button(f1,padx=16,pady=16,bd=8,fg="white",font=('arial',16,'bold'),width=10,text="Reset",bg="firebrick",command=Reset).grid(row=2,column=3)
 btnExit=Button(f1,padx=16,pady=16,bd=8,fg="black",font=('arial',16,'bold'),width=10,text="Quit",bg="powder blue",command=qExit).grid(row=4,column=3)
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 root.mainloop()
