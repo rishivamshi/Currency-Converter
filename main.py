@@ -16,30 +16,31 @@ import csv
 from tables import createStandardTable as cst
 
 
-root=Tk()
-root.geometry("1600x800+0+0")
-root.title("Currency Converter")
-cInput=StringVar() 
-operator=""
-coi = 0.0
+def init():
+    root=Tk()
+    root.geometry("1600x800+0+0")
+    root.title("Currency Converter")
+    cInput=StringVar() 
+    operator=""
+    coi = 0.0
 
-Tops=Frame(root,width=1600,height=5,bg="sienna2",relief=SUNKEN)
-Tops.pack(side=TOP)
+    Tops=Frame(root,width=1600,height=5,bg="sienna2",relief=SUNKEN)
+    Tops.pack(side=TOP)
 
-f2=Frame(root,width=300,height=700,relief=SUNKEN)
-f2.pack(side=LEFT)
-f1=Frame(root,width=400,height=700,relief=SUNKEN)
-f1.pack(side = LEFT)
-f3=Frame(root,width=900,height=700,relief=SUNKEN)
-f3.pack(side=LEFT)
+    f2=Frame(root,width=300,height=700,relief=SUNKEN)
+    f2.pack(side=LEFT)
+    f1=Frame(root,width=400,height=700,relief=SUNKEN)
+    f1.pack(side = LEFT)
+    f3=Frame(root,width=900,height=700,relief=SUNKEN)
+    f3.pack(side=LEFT)
 
-localtime=time.asctime(time.localtime(time.time()))
+    localtime=time.asctime(time.localtime(time.time()))
 
 
-lblInfo=Label(Tops,font=('arial',50,'bold'),text="Currency Converter",fg ="sienna2",bd=10,anchor='w')
-lblInfo.grid(row=0,column=0)
-lblInfo=Label(Tops,font=('arial',20,'bold'),text=localtime,fg ="sienna2",bd=10,anchor='w')
-lblInfo.grid(row=1,column=0)
+    lblInfo=Label(Tops,font=('arial',50,'bold'),text="Currency Converter",fg ="sienna2",bd=10,anchor='w')
+    lblInfo.grid(row=0,column=0)
+    lblInfo=Label(Tops,font=('arial',20,'bold'),text=localtime,fg ="sienna2",bd=10,anchor='w')
+    lblInfo.grid(row=1,column=0)
 
 
 def btnClick(numbers):
@@ -190,4 +191,5 @@ def main():
     root.mainloop()
 
 
+init()
 main()
