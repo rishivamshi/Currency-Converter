@@ -10,7 +10,7 @@ Created on Sat Nov 25 20:08:51 2017
 
 from tkinter import *
 import time
-from currency_converter import CurrencyConverter
+from currency_converter import CurrencyConverter as CC
 import pandas as pd
 import csv
 from tables import createStandardTable as cst
@@ -66,7 +66,7 @@ def Ref():
    
     global coi
     coi = float(cInput.get())
-    c = CurrencyConverter()
+    c = CC()
     value = c.convert(coi,cof,cob)
     Cost.set(value)
     
